@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap');
 h1{
 	color: #6fbb9a;
 	text-align: center ;
@@ -16,6 +17,9 @@ h3{
 	border-left: #d0e35b 10px solid;
 	padding: 5px 20px;
 	margin-bottom: 0;
+}
+p{
+	font-family: "LXGW WenKai Mono TC", monospace;
 }
 a:link {color:#FF0000;} 
 a:visited {color:#00FF00;} 
@@ -38,4 +42,21 @@ body{
 	padding: 40px 80px;
 	border: #f6bb9e 1px solid;
 	background-color: #fff;
+}
+div{
+	background-color: #cffebe;
+	.a { background-color: #ff0000 };
+	padding:#cffebe
+}
+#top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+	transform: scale(2);
+}
+#try {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+	transform: scale(2);
 }
