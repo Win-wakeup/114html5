@@ -77,48 +77,24 @@ img.addEventListener("mouseout",function(){  //監聽事件，滑鼠懸浮離開
     this.src = "Cat03.jpg";
 })
 */
+
 const guessSubmit = document.querySelector(".guessSubmit");
 const guessField = document.querySelector(".guessField");
 const result = document.querySelector(".result");
 const count = document.querySelector(".count");
 const restartBtn = document.querySelector(".restartBtn");
+const guesses = document.querySelector(".guesses");
 
+function setGameOver() {
+    guessField.disabled = true; //停止輸入功能
+    guessSubmit.disabled = true;    //停止按鈕功能
+}
 
 let randomNumber = Math.floor(Math.random()*100);
 console.log("觀察隨機的數字：", randomNumber);
 
-let countNum =0;   //廣域變數
-function checkGuess() {
-    countNum++;
-    count.textContent = "猜測次數："+countNum;
-    const userGuess = Number(guessField.value);  //取得欄位值，並轉為數字
-    if  (  userGuess ===  randomNumber) {
-        result.textContent = "猜測結果：Congratulations!" ;
-    }
-    else if (userGuess < randomNumber ) {
-        result.textContent = "猜測結果：數字太小!" ;
-    }
-    else if (userGuess  > randomNumber ) {
-        result.textContent = "猜測結果：數字太大!";
-    }
-    //guessField.focus();       //游標焦點預設在輸入欄位裡
-    if(countNum>=10){
-        result.textContent += "---遊戲結束，你個菜狗";
-        result.style.backgroundColor="red";
-        alert("遊戲結束");
-        setGameOver();
-
-        function setGameOver() {
-                guessField.disabled = true; //停止輸入功能
-                guessSubmit.disabled = true;    //停止按鈕功能
-        }
-    }
-    const guesses = document.querySelector(".guesses");
-    guesses.textContent += userGuess + " ";
-}
-
 function initGame() {
-     countNum = 0;
+    countNum = 0;
     count.textContent = "猜測次數：" + countNum;
 
     // 清空結果與背景色
@@ -138,8 +114,59 @@ function initGame() {
 
     // 讓輸入框重新取得焦點
     guessField.focus();
+
+    randomNumber = Math.floor(Math.random()*100);
+    console.log("觀察隨機的數字：", randomNumber);
 }
 
+let countNum =0;   //廣域變數
+function checkGuess() {
+    countNum++;
+    count.textContent = "猜測次數："+countNum;
+    const userGuess = Number(guessField.value);  //取得欄位值，並轉為數字
+    guesses.textContent += userGuess + " ";
+    if  (  userGuess ===  randomNumber) {
+        result.textContent = "猜測結果：Congratulations!" ;
+        if(countNum<=1){
+            result.textContent += "---遊戲結束，你是鬼吧!";
+            alert("遊戲結束");
+            setGameOver();
+        }
+        else if(countNum<=5){
+            result.textContent += "---遊戲結束，運氣不錯!";
+            alert("遊戲結束");
+            setGameOver();
+        }
+        else if(countNum<=8){
+            result.textContent += "---遊戲結束，運氣還行!";
+            alert("遊戲結束");
+            setGameOver();
+        }
+        else if(countNum<=9){
+            result.textContent += "---遊戲結束，狗運降臨!";
+            alert("遊戲結束");
+            setGameOver();
+        }
+        else{
+            result.textContent += "---遊戲結束，海底撈月!";
+            alert("遊戲結束");
+            setGameOver();
+        }
+    }
+    else if (userGuess < randomNumber ) {
+        result.textContent = "猜測結果：數字太小!" ;
+    }
+    else if (userGuess  > randomNumber ) {
+        result.textContent = "猜測結果：數字太大!";
+    }
+    //guessField.focus();       //游標焦點預設在輸入欄位裡
+    if(countNum>=10){
+        result.textContent += "---遊戲結束，你個菜狗!";
+        result.style.backgroundColor="red";
+        alert("遊戲結束");
+        setGameOver();
+    }
+}
 
 guessSubmit.addEventListener("click", checkGuess);   //當按鈕被點擊，執行函
 restartBtn.addEventListener("click", initGame);
